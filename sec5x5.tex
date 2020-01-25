@@ -1,0 +1,224 @@
+\section{線積分}
+
+2変数の場合，線積分とは，曲線$C$と関数$f,g$に対して，
+\begin{equation}
+	\int_C \omega \quad \text{ただし，}	\quad
+	\omega = f(x,y) dx + g(x,y) dy
+  \: \text{と略記}
+\label{eq5x45}
+\end{equation}
+と表される積分で，曲線$C$が$C^1$級の助変数表示
+\begin{equation}
+	x=\varphi(t), \quad y= \psi(t), \quad a \leqq t \leqq b
+\label{eq5x46}
+\end{equation}
+をもつときには，次のように書けるものである：
+\begin{equation}
+	\int_C \omega
+  =
+  \int_a^b \{ f(\varphi(t),\psi(t)) \varphi'(t) + g(\varphi(t),\psi(t)) \varphi'(t)\} dt.
+\label{eq4x47}
+\end{equation}
+歴史的には，力学における仕事の概念などから生まれた線積分は，
+以下の定理5.46でみるように，微分積分学の基本公式のもう一つの
+一般化を与えるものである．
+
+線積分$\displaystyle \int_C \omega$は，以下のようにして定義される．
+
+曲線$C$は始点$A$，終点$B$をもつものとし，$C$の分割
+\begin{equation}
+	\varDelta : P_0=A, P_1 , P_2, \cdots , P_{n-1}, P_n=B
+\label{eq5x48}
+\end{equation}
+と，点$Q_i \in P_{i-1}P_i \: (i=1,2, \cdots , n)$に対して，和
+\begin{equation}
+	\sum_{i=1}^n \{f(Q_i) (x_i-x_{i-1}) + g(Q_i) (y_i-y_{i-1}) \}
+\label{eq5x49}
+\end{equation}
+を考える．ただし，$(x_i,y_i)$は点$P_i$の座標とする．
+ここで，
+\[
+	\text{mesh}(\varDelta) = \max_{i \leq i \leq n} L(P_{i-1}P_i)
+\]
+とおく．
+
+\定義{5.45}
+和(\ref{eq5x48})が，$\text{mesh}(\varDelta) \rightarrow 0$のとき，
+点$Q_i \in P_{i-1}P_i \: (1 \leqq i \leqq n)$の選び方に
+よらず極限をもつならば，その極限を$\displaystyle \int_c \omega$と
+書き，曲線$C$上での微分形式$\omega = fdx + gdy$の\textbf{線積分}という．
+\□
+
+\定理{5.46}
+$C$が長さを持つ曲線で，$f,g$が
+連続ならば，線積分$\displaystyle \int_C (f dx + gdy)$
+が存在する．
+\□
+この定理の証明は後回しにして，線積分に関して
+最も重要な定理を述べよう．
+
+\定理{5.47}
+$\omega $が全微分形式のとき，つまり，ある$C^1$級関数$F$
+によって，
+\begin{equation}
+	\omega = dF \quad \text{つまり} \quad
+  f = \frac{\partial F}{\partial x},g=\frac{\partial F}{\partial y}
+\label{eq5x50}
+\end{equation}
+とかけるとき，始点$A$，終点$B$の長さをもつ連続曲線$C$に対して，
+次式が成り立つ：
+\begin{equation}
+	\int_C dF = F(B) - F(A)
+\label{eq5x51}
+\end{equation}
+\□
+\注意{5.48}
+$C$が$C^1$級曲線で，助変数表示(\ref{eq5x46})で与えられるとき，
+左辺(\ref{eq5x47})で与えられるから，(\ref{eq5x50})より，
+\begin{align*}
+	\int_C dF &= \int_a^b \left( \frac{d}{dt}F(\varphi(t),\psi(t))
+                        \right) dt
+             = F(\varphi(b),\psi(b))-F(\varphi(a),\psi(b)) \\
+            &= F(A) - F(B)
+\end{align*}
+となる．つまり，このとき(\ref{eq5x51})は微分積分学の基本公式そのものである．
+なお，力学としては，(\ref{eq5x51})は，保存力の場合の仕事と
+ポテンシャルの関係式である．
+
+[ 定理5.46の\証明]
+$f,g$は連続であるから，
+\[
+	\omega ( \delta) 
+= \sup \{ \sqrt{(f(P) - f(Q))^2 + (g(P) - g(Q))^2}
+  \: | \: P,Q \in C, PQ < \delta
+        \}
+\]
+とおくと，$\displaystyle\lim_{\delta\rightarrow0} \omega(\delta)=0$が成り立つ．
+さて，分割$\varDelta$に対して，$\text{mesh}(\varDelta)=\delta$のとき，
+弧$P_{i-1}P_i$上にどんな点$Q_i$を選んでも，
+\[
+	P_iQi \leqq L(P_iQ_i) \leqq L(P_{i-1}P_i) \leqq \delta
+\]
+が成り立つ．したがって，
+\begin{align*}
+\left|
+  \sum_{i=1}^n \{f(Q_i)(x_i-x_{i-1}) + g(Q_i)(y_i-y_{i-1})\}
+    -
+  \sum_{i=1}^n \{f(P_i)(x_i-x_{i-1}) + g(P_i)(y_i-y_{i-1})\}
+\right|	
+\end{align*}
+
+
+（保留）
+
+\定理{5.51}
+（グリーン(Green)の公式）
+$C$を長さをもつ閉領域で，自己交点はないものとし，
+\footnote{
+$C$が自己交点を持つときは，自己交点を持たない閉曲線にわければ，定理が使える．
+}$C$に囲まれた領域を$D$とする．このときには，
+$\omega = f dx + g dy$で，$f,g$が$C^1$級のとき，
+\[
+	\int_C \omega = \int\int_D d\omega.
+\]
+ただし，$C$は$D$を正の向きに囲むものとし，
+$\displaystyle d\omega=\left( \frac{\partial g}{\partial x} - \frac{\partial f}{\partial y}\right)dxdy$
+と略記した．
+\begin{figure}[hbtp]
+	\centering
+	\includegraphics[bb=0 0 800 200,clip,width=5cm,height=4cm]{fig5x17.bmp}
+	\caption{}
+	\label{fig5x17}
+\end{figure}
+
+\pagebreak
+\例{5.52}
+$u$が$C^2$級関数で，
+$\displaystyle 
+  \Delta u = \frac{\partial ^2u}{\partial x^2} + 
+  \frac{\partial ^2u}{\partial y^2} =0$のとき，
+$C^1$級の閉曲線$C$に対して，
+\[
+	\int_C \left( \frac{\partial u}{\partial x}dy - \frac{d u}{d y}dx
+         \right)=0
+\]
+実際，
+$\displaystyle 
+ \omega = \frac{\partial u}{\partial x} dy - \frac{\partial u}{\partial y}dx$
+のとき，
+\[
+	d \omega = \left(\frac{\partial ^2u}{\partial x^2} + 
+                   \frac{\partial ^2v}{\partial y^2}
+             \right) dx dy=0.
+\]
+であるから，
+\[
+	\int_C \omega = \int\int_D d\omega = \int\int_D 0 =0 .	
+\]
+
+\問{15}
+$u,v$が$C^2$級関数のとき，次式が成り立つことを示せ．
+\[
+	\int_D (v \Delta u - u \Delta v )dxdy
+  =
+	\int_C \left(v \frac{\partial u}{\partial r}  - u \frac{\partial v}{\partial r} v \right)d \theta
+\]
+ただし，$D=\{(x,y) \: | \: x^2 + y^2 <1 \}$,
+$C= \{ ( \cos \theta , \sin \theta) \: | \: 0 \leqq \theta < 2\pi \}$.
+
+\証明
+\begin{align*}
+	\int_C \left( v \frac{\partial u}{\partial r} - u \frac{\partial v}{\partial r}
+         \right) d \theta
+  &= \int_C \left\{
+               v \left(
+                    \frac{\partial u}{\partial x} \cos \theta
+                    +
+                    \frac{\partial u}{\partial y} \sin \theta
+                 \right)
+             - u \left(
+                    \frac{\partial v}{\partial x} \cos \theta
+                    +
+                    \frac{\partial v}{\partial y} \sin \theta
+                 \right)
+           \right\} d \theta \\
+  &= \int_C \left\{
+              v \left(
+                   \text{(保留)}
+                \right)   
+            \right\} \\
+  &= \int_C \left\{
+                 \left(
+                    v \frac{\partial u}{\partial x} - u \frac{\partial v}{\partial x}
+                 \right)dy
+                 -
+                 \left(
+                    v \frac{\partial u}{\partial y} - u \frac{\partial v}{\partial y}
+                 \right)dx
+            \right\} \\
+  &= \int_D \left(
+                   v \frac{\partial}{\partial x} \frac{\partial u}{\partial x}
+                 - u \frac{\partial ^2v}{\partial x^2}
+                 + v \frac{\partial ^2u}{\partial y^2}
+                 - u \frac{\partial ^2v}{\partial y^2}
+            \right) dxdy
+            \\
+  &= \int_D \left(
+                   v \frac{\partial ^2u}{\partial x^2}
+                 - u \frac{\partial ^2v}{\partial x^2}
+                 + v \frac{\partial ^2u}{\partial y^2}
+                 - u \frac{\partial ^2v}{\partial y^2}
+            \right) dxdy
+  \\
+  &= \int_D \left( v \left( \frac{\partial ^2u}{\partial x^2} + 
+                            \frac{\partial ^2u}{\partial y^2}
+                     \right)
+                 - u \left(
+                            \frac{\partial ^2v}{\partial x^2} + 
+                            \frac{\partial ^2v}{\partial y^2}
+                     \right)
+            \right) dxdy \\
+  &= \int_D ( v \Delta u - u \Delta v) dxdy
+\end{align*}
+
+（保留）

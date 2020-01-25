@@ -1,0 +1,39 @@
+\section{複素関数の積分}
+
+\subsection{}
+
+\subsection{}
+
+\subsection{積分の基本性質}
+基本的ないくつかの性質を列挙しよう．いずれも定義(\ref{def3.15})，(\ref{def3.16})から
+すぐに確かめられる．
+
+\命題{3.13}
+\begin{align*}
+	&\int_C	(f(z)	\pm	g(z))	dz	=	\int_C	f(z)	dz	\pm	\int_C	g(z)	dz,		\\
+	&\int_C	\alpha	f(z)				=	\alpha	\int_C	f(z)	dz,	\quad	\text{($\alpha$は定数)},	\\
+	&\int_{C^{-1}}	f(z)				=	-	\int_C	f(z)	dz,		\\
+	&\int_{C_2C_1}	f(z)				=	\int_{C_1}	f(z)	dz	+	\int_{C_2}	f(z)	dz.
+\end{align*}
+\□
+
+\命題{3.14}
+\begin{equation}
+	\left|	\int_C	f(z)	dz	\right|	\leqq	\int_C	|f(z)|	|dz|.
+	\label{eq3x17}
+\end{equation}
+ここで右辺は，$X$が$z=z(t)	\:	(a	\leqq	t	\leqq	b)$と与えられるとき
+\[
+	\int_a^b	|f(z(t))|	\left|	\frac{dz}{dt}\right|	dt
+\]
+を表す．
+
+\証明
+（以下，保留）
+\■
+
+関数列$\{f_n(z)	\}_{n=1}^\infty$が$\C$の部分集合$K$上$f(z)$に\textbf{一様収束}するとは，
+\[
+	\sum_{z	\in	K}	|f_n(z)	-	f(z)	|	\rightarrow	0	\quad	(n	\rightarrow	\infty).
+\]
+が成り立つことをいう．積分と極限の順序を保証する次の事実は第4章で活用する．

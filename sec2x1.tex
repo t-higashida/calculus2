@@ -1,0 +1,357 @@
+\chapter{連続関数}
+
+この第2章では，まず，「微分と積分1」では直感的に扱ってきた中間値の定理
+や最大値の定理を実数のもつ基本性質から厳密に導き，
+さらに，より詳しい性質や多変数の連続関数を扱う．
+
+
+このようなやや抽象的な世界に馴染めない読者は，面白そうなところをざっと拾い読みして,
+第3章以後に進み，将来その必要を感じたときに読み直せばよい．
+
+実際，数学者たちも昔はおおらかに連続性や極限を扱っていた．しかし，
+18世紀末あたりになって，おおらかに「幾何学的直観」にのみ依拠していると，
+曖昧さや，さらには自己矛盾など深刻な問題があちこちに生ずることが認識され，
+数学界全体が意気消沈，つまりは，落ち込んだようである．その後，
+$\varepsilon -	\delta $論法などの厳密な取り扱い方が発見され，
+フーリエ解析以後の強力な解析学が誕生することとなった．
+本章では（そして本分冊を通じて）実数の基本性質は認めて，
+話を進める．
+
+\section{実数の基本性質と連続関数}
+
+\subsection{上限の存在}
+
+例えば，実数$\sqrt{2}	=	1.4142	\cdots$を定めるためには，
+\[
+	1,	\:	1.4,	\:	1.41,	\:	1.414,	\:	1.4142,	\cdots
+\]
+のような有理数による近似列を与えればよいが，数直線の上で考えて，
+集合
+\[
+	\{	r	\:	|	\:	r	\in	\Q	,	\:	r^2	<	2\}
+	\quad
+	\text{または}
+	\quad
+	\{	r	\:	|	\:	r	\in	\Q	,	\:	r^2	\leqq	2\}	
+\]
+の“右端”として特徴づけることもできる（図\ref{fig2x1})．
+\begin{figure}[hbtp]	
+		\centering	
+		\includegraphics[bb=0 0 800 600,clip,width=6cm,height=1.75cm]{fig2x1.bmp}	
+		\caption{}	
+		\label{fig2x1}	
+\end{figure}	
+一般に，実数の集合$A$が\textbf{上に有界}なとき，つまり，
+\begin{equation}
+	a	\in	A	\Rightarrow	a	\leqq	M	
+	\label{eq2x1}
+\end{equation}
+を満たす実数$M$があるとき，次のことが成り立つ．
+
+\textbf{上限の存在}　上に有界名集合$A$に対して，次の2条件を満たす実数$a^{*}$が定まる：
+\begin{list}{}{}
+	\item	(A) $a	\in	A	\Rightarrow	a	\leqq	a^{*}$
+	\item	(B) $b	<	a^{*}	\Rightarrow	b	<	a	\leqq	a^{*}$をみたす$A$の元$a$がある．	
+\end{list}
+この実数$a^{*}$を集合$A$の\textbf{上限}（supremum）とよび，
+\begin{equation}
+	a^{*}	=	\sup	A
+	\label{eq2x2}
+\end{equation}
+と書く．また，集合$A$が上に有界でないことを，
+\begin{equation}
+	\sup	A	=	+	\infty
+	\label{eq2x3}
+\end{equation}
+と表す．
+
+上の(A),(B)で大小関係を逆にすると，\textbf{下に有界}および下に有界な集合の\textbf{下限}（infimmum）
+が定義される．$A$の下限は$\inf	A$と表す．また，$A$が下に有界でないことを同様に，
+$\inf A	=	-	\infty$と表す．
+
+\例{2.1}
+実数$a$に対して，
+\begin{align*}
+	\sqrt[3]{a}	&=	\sup	\:	\{	x	\in	\Q	\:	|	\:	x^3	\leqq	a	\}	\\
+							&=	\inf	\:	\{	x	\in	\Q	\:	|	\:	x^3	>	a\}.
+\end{align*}
+\□
+
+上限の存在から，有界単調列の収束が導かれる．
+
+\定理{2.2}
+有界な非減少列は収束する．すなわち，数列$\{a_n\}_{n=1}^\infty$に対して，
+2つの仮定
+\begin{list}{}{}
+	\item	(a)	$a_n	\leqq	M	\:	(n=1,2,\cdots)$を満たす実数$M$がある
+	\item	(b) $a_1	\leqq	a_2	\leqq	\cdots	\leqq	a_n	\leqq	a_{n+1}	\leqq	\cdots$
+\end{list}
+が成り立てば，数列$\{a_n\}$はその上限$\sup_{n	\geq	1}	a_n$に収束する．
+\□
+
+\注意{}
+集合$A	=	\{	a_n	\:	|	\:	n	\geqq	1\}$の上限を$\sup_{n	\geq	1}	a_n$と略記する．
+同じように，集合$\{f(x)	\:	|	\:	a	\leqq	x	\leqq	b\}$の上限は，$\sup_{a	\leq	x	\leq	b}	f(z)$とも
+表す．
+
+\証明
+仮定(a)より集合$\{a_n	\:	|	\:	n	\geqq	1	\}$は上に有界であるから，上限が存在する．
+$a^{*}		=	\sup_{n	\geq	1}	a_n$とおくと，上限の性質(B)により，正数$\varepsilon $を
+どんな小さく与えられても，
+\[
+	a^{*}	-	\varepsilon <	a_N
+\]
+を満たす$N$がある．このとき，仮定(b)と上限の性質(A)から，
+\[
+	n	\geqq	N	\Rightarrow	a^{*}-\varepsilon	<	a_n	\leqq	a^{*}.
+\]
+よって，任意の正数$\varepsilon $に対して，
+\[
+	n	\geqq	N	\Rightarrow	|a_n	-	a^{*}	<	\varepsilon 
+\]
+を満たす$N$が存在する．つまり，$\displaystyle	\lim_{n\rightarrow	\infty}	a_n	=	a^*$.
+\■
+
+\例{2.3}
+$0	<	r	<1$のとき，
+\[
+	\sum_{k=0}^{\infty}	r^k	=	\lim_{n\rightarrow	\infty}	\sum_{k=0}^{n}	r^k	=	\frac{1}{1-r}.
+\]
+実際，$a_n	=	\displaystyle	\sum_{k=0}^{n}	r^k$とおくと，
+$\{a_n\}_{n=0}^\infty$は単調増大，また，$(1-r)a_n	=	1-r^{n+1}	\leqq	1$より，
+$\{a_n\}_{n=0}^\infty$は有界，したがって，$a_n$の極限$\displaystyle	\lim_{n\rightarrow	\infty}	a_n$が
+存在する．よって，$1-(1-r)a_n	=	r^{n+1}	\rightarrow	0	\:	(n	\rightarrow	\infty)$より，
+$\displaystyle	\lim_{n\rightarrow	\infty}	a_n	=	\frac{1}{1-r}$がわかる．
+\□
+
+\例{2.4}
+$p$が実数で，$p>1$のとき，$\displaystyle	\sum_{k=1}^{\infty}	\frac{1}{k^p}$は収束する．
+実際，$a_n	=	\displaystyle	\sum_{k=1}^{n}	\frac{1}{k^p}$は明らかに単調増大．
+上界を求めるために，$2^m	\leqq	k	<	2^{m+1}	\:	(m	\geqq	0)$と分けて考えると，
+\begin{equation*}
+	\sum_{k=2^m}^{2^{m+1}-1}	\frac{1}{k^p}
+	\leqq
+	\sum_{k=2^m}^{2^{m+1}-1}	\frac{1}{2^{mp}}
+	=
+	\frac{2^m}{2^{mp}}
+	=
+	\left(	\frac{1}{2^{p-1}}	\right)^m.
+\end{equation*}
+ここで，$2^{p-1}	>	1$だから，
+\[
+	a_n	\leqq	\sum_{m=0}^{\infty}	\left(\frac{1}{2^{p-1}}	\right)^m	
+	=
+	\frac{1}{1-2^{-(p-1)}}
+	\quad	
+	(n=1,2,	\cdots)
+\]
+ゆえに，$\displaystyle	\lim_{n\rightarrow	\infty}	a_n	=	\sum_{k=1}^{\infty}	\frac{1}{k^p}$は
+存在する．
+\□
+
+\問{1}
+同様に考えて，$p	\leqq	1$のとき，$\displaystyle	\sum_{k=1}^{\infty}	\frac{1}{k^p}$は
+発散することを示せ．
+
+（保留）
+
+\例{2.5}
+$x	\geqq	0$のとき，$\displaystyle	\lim_{n\rightarrow	\infty}	\left(1+	\frac{x}{n}	\right)^n$，
+$\displaystyle	\sum_{k=0}^{\infty}	\frac{x^k}{k!}$は共に存在し，
+値は一致する．
+\□
+
+上限の存在から，中間値の定理を導くことができる．
+
+\定理{2.6}（中間値の定理）$f$の区間$[a,b]$で連続な関数で，$\gamma$が実数のとき，
+\[
+	f(a)	<	\gamma	<	f(b)	\quad	\text{または}	\quad	f(a)	>	\gamma	>	f(b)
+\]
+ならば，$f(c)	=	\gamma	,	a<	c	<	b$をみたす$c$が必ず存在する．
+
+\証明
+
+$A	=	\{	x	\:	|	\:	a	\leqq	x	\leqq	b,	\quad	f(x)	<	\gamma	\}$とおくと，
+$A$は上に有界だから上限を持つ．$c	=	\sup	A$とおいて，$f(c)=\gamma$を示そう．
+
+まず，上限の性質(B)より，自然数$n$に対して，
+\[
+	c	-	\frac{1}{n}	<	x_n	\leqq	c,	\quad	x_n	\in	A
+\]
+となる実数$x_n$が選べる．このとき，$\displaystyle	\lim_{n\rightarrow	\infty}	x_n	=	c	,	x_n	\in	A$
+だから，
+\[
+	f(c)	=	\lim_{n\rightarrow	\infty}	f(x_n)	\leqq	\gamma.
+\]
+一方，上限の性質(A)より，$c	<	x	\leqq	b$ならば$x	\not\in	A$だから，
+$f(x)	\geqq	\gamma.$よって，
+\begin{equation*}
+	f(c)	=	\lim_{n\rightarrow	\infty}	f\left(	c	+	\frac{1}{n}	\right)	\geqq	\gamma
+\end{equation*}
+ゆえに，$f(c)	=	\gamma.$
+\■
+
+直感的にはグラフより明らかなように見えることも，上限の存在から厳密に導くことができる．
+
+\例題{2.7}
+$f	:	[a,b]	\rightarrow	\R$が連続な単調非減少関数のとき，次の左極限，右極限が存在することを示せ．
+\begin{equation}
+	\begin{cases}
+		\displaystyle	f(x-0)	=	\lim_{y\rightarrow	x,y<x}	f(y)	&	(a	<	x	\leqq	b)	\\
+			\\
+		\displaystyle	f(x+0)	=	\lim_{y\rightarrow	x,y>x}	f(y)	&	(a	\leqq	x	<	b)
+	\end{cases}
+	\label{eq2x4}
+\end{equation}
+
+\証明
+$a	<	x	\leqq	b$として，集合$A	=	\{	f(y)	\:	|	\:	a	\leqq	y	<	x	\}$を考えると，
+$y	<	x	$のとき$f(y)	\leqq	f(x)$だから（単調非減少性），$A$の上限が存在する．これが
+求める左極限であることを示す．$\alpha	=	\sup	A$とおくと，
+$y	<	x$のとき，$f(y)	\leqq	\alpha$が成り立つ．
+
+ところで，上限の性質(B)によって，任意の自然数$k$に対して，
+\[
+	\alpha	-	\frac{1}{k}	\leqq	\beta_k	\leqq	\alpha
+\]
+を満たす$A$の元$\beta_k$が存在する．そこで，$f(y_k)	=	\beta_k	,	\:	y_k	<	x$をみたす
+$y_k	\:	(k	\geqq	1)$をとると，$f$は単調非減少だから，
+\begin{equation}
+	\max_{1	\leq	j	\leq	k}	y_j	\leqq	y	<	x	\Longrightarrow	\alpha	-	\frac{1}{k}	\leqq	f(y)	\leqq	\alpha
+	\label{eq2x5}
+\end{equation}
+よって，$y_\infty	=	\sup_{k	\geq	1}	y_k$とおくとき，$y_\infty	=	x$ならば，
+(\ref{eq2x4})は$\lim_{y\rightarrow	x,y<x}	f(y)	=	\alpha$を示している．
+また，もし$y_\infty	<	x$ならば，$y_\infty	<	y	<	x$のとき$f(y)	=	\alpha$となるから，
+(\ref{eq2x5})の左式の挟み撃ちより，
+やはり，$\lim_{y\rightarrow	x,y<x}	f(y)	=	\alpha$が成り立つ．
+右極限$f(x+0)$についても同様に証明することができる．
+\■
+
+\注意{}
+定義域の各点で左右の極限をもつ関数を，第１種不連続関数という．
+
+上限の性質を駆使する問題を１つ考えてみよう．
+
+\例題{2.8}
+非負実数列$\{a_n\}_{n=1}^\infty$が劣加法的，つまり，
+\begin{equation}
+	a_{n+m}	\leqq	a_n	+	a_m	\:	\quad	(n,m	\geqq	1)
+	\label{eq2x6}
+\end{equation}
+が成り立つと仮定する．このとき，極限$\displaystyle	\lim_{n	\rightarrow	\infty}	\frac{a_n}{n}$
+が存在して，$\displaystyle	\alpha =	\inf_{n	\geq	1}	\frac{a_n}{n}$に等しいことを示せ．
+
+\解
+
+(\ref{eq2x6})を繰り返し用いれば，
+\[
+	a_{m_1+m_2	+	\cdots	+	m_n}	\leqq	a_{m+1}	+	a_{m_2}	+	\cdots	+	a_{m_n}	\:	
+	\quad	(n	\geqq	1	,	m_1	,	\cdots	,	m_n	\geqq	1)
+\]
+とくに，$n	=q	k	+	r$のとき，$a_n	\leqq	q	a_k	+	a_r$．ここで，$k$を固定して，
+$\displaystyle	\max_{0	\leq	r	<	k}	a_r	=A_k$とおくと，
+\[
+	\alpha_m	\leqq	\frac{a_k}{k}	+	\frac{A_k}{m}.
+\]
+ところで，
+$\displaystyle	\alpha_1	\geqq	\alpha_2	\geqq	\cdots	\geqq	\alpha_m	\leqq	\alpha	=	\inf_{n	\geq	1}	\frac{a_n}{n}$
+だから，
+$\displaystyle	\limsup_{m\rightarrow	\infty}	\alpha_m$が存在する．
+したがって，
+\[
+	\alpha	\leqq	\lim_{m\rightarrow	\infty}	\alpha_m	\leqq	\frac{a_k}{k}	\quad	(k	\geqq	1)
+\]
+よって，$k$について下限をとれば，
+\[
+	\lim_{m\rightarrow	\infty}	\alpha_m	=	\alpha	=	\inf_{k	\geq	1}	\frac{\alpha_k}{k}.
+\]
+一方，$\displaystyle	\alpha	\leqq	\frac{a_n}{n}	\leqq	\alpha_n$だから，$\displaystyle	\lim_{n\rightarrow	\infty}	\frac{a_n}{n}$は
+存在して，$\alpha$に等しい．
+\■
+
+（保留）
+
+\subsection{区間縮小法の原理}
+
+（保留）
+
+ここで収束半径について少し触れておこう．
+
+\補題{2.18}
+
+級数$\displaystyle	\sum_{n=0}^\infty	c_n$が収束すれば，
+$|z|<	1$のとき，級数$\displaystyle	\sum_{n=0}^\infty	|c_n	z^n|$も
+収束する．
+
+\証明
+
+$\displaystyle	\sum_{n=0}^\infty	c_n	=	\lim_{n\rightarrow	\infty}	\sum_{k=0}^{n}	c_k$が
+収束するから，$\lim_{n\rightarrow	\infty}	c_n	=	0$．
+よって，$\{	c_n	\}_{n=0}^\infty$は有界列である．したがってある$M	>	0$が存在して，
+\[
+	|c_n|	\leqq	M	\quad	(n=0,1,2,	\cdots	)
+\]
+とできる．$|z|	<	1$のとき，
+\[
+	|c_n	z^n	|	\leqq	M|z|^n	\quad	(n	\geqq	0).
+\]
+したがって，数列$\displaystyle	\sum_{k=0}^n	|c_k	z^k|$は単調増大列で，
+\[
+	\sum_{k=0}^n	|c_k	z^k|	\leqq	\sum_{k=0}^{n}	M	|z|^k	=	M	\frac{1-|z|^{n+1}}{1-|z|}
+	\leqq	\frac{M}{1-|z|}
+\]
+だから，$\displaystyle	\sum_{k=0}^\infty	|c_k	z^k|$は収束する．
+\■
+
+\定義{2.19}べき級数$\displaystyle	\sum_{n=0}^\infty	c_n	z^n$に対して，
+\begin{equation}
+	r	=	\sup	\left\{	|z|	;	z	\in	\C	,	\sum_{n=0}^\infty	|	c_n	z^n|	\:	\text{は収束する}	\right\}
+	\label{eq2x9}
+\end{equation}
+をその\textbf{収束半径}という．上の補題より，次のようにもいえる：
+\begin{equation}
+	r	=	\sup	\left\{	|z|	;	z	\in	\C	,	\sum_{n=0}^\infty	c_n	z^n	\:	\text{は収束する}	\right\}
+	\label{eq2x10}
+\end{equation}
+\□
+
+\定理{2.20}
+（コーシー-アダマール(Cauchy - Hadamard)の公式）
+べき級数$\displaystyle	\sum_{n=0}^\infty	c_n	z^n	$の収束半径$r$は次の公式で与えられる．
+\begin{equation}
+	\frac{1}{r}	=	\lim_{n\rightarrow	\infty}	\sup_{k	\geq	n	}	|c_k|^{1/k}	.	
+	\label{eq2x11}
+\end{equation}
+
+\証明
+収束半径$r$の定義より，
+\begin{list}{}{}
+	\item	（a)	$|z|	<	r	\Longrightarrow	\sum_{n=0}^{\infty}	|c_n	z^n|	$は収束
+	\item	（b)	$|z|	>	r	\Longrightarrow	\sum_{n=0}^{\infty}	|c_n	z^n|	$は発散
+\end{list}
+よって，$a_n	=	|c_n	z^n|$を考えて，次のことをいえば十分である：
+
+$\displaystyle	\gamma	=	\lim_{n\rightarrow	\infty}	\sup_{k	\geq	n}	a_k^{1/k}$をおくとき，
+\begin{list}{}{}
+	\item	(a')	$|\gamma	|	<	1	\Longrightarrow	\sum_{n=0}^{\infty}	a_n	$は収束
+	\item	(b')	$|\gamma	|	>	1	\Longrightarrow	\sum_{n=0}^{\infty}	a_n	$は発散
+\end{list}
+(a')の証明．$\alpha$を$\gamma	<	\alpha	<	1$，
+例えば，$\displaystyle	\alpha	=	\frac{\gamma	+	1}{2}$とすると，$\gamma$の定義:
+$\displaystyle	\gamma	=	\lim_{n\rightarrow	\infty}	\sup_{k	\geq	n}	a_k^{1/k}$
+より，
+$	k	\geqq	n	\Rightarrow	a_k^{1/k}	<	\alpha$をみたす$n$がある．
+すると，$a_k	\leqq	\alpha^k	\:	(	k	\geqq	n)$．
+よって，\[
+	\sum_{k=0}^{\infty}	a_k	=	\sum_{k=0}^{n-1}	a_k	+	\sum_{k=n}^{\infty}	a_k
+\leqq	
+	\sum_{k=0}^{n-1}	a_k	+	\frac{\alpha^k}{1-\alpha}	<	\infty.
+\]
+
+(b')の証明．$\gamma	$は単調減少数列の極限だから，$\gamma	>	1$のとき，
+\[
+	\sup_{k	\geq	n}	a_k^{1/k}	\geqq	\gamma	>	1	\quad	(n=1,2,	\cdots	)
+\]
+よって，$a_{k_n}	\geqq	\gamma^{k_n}	\geqq	1	\:	(k_n	\rightarrow	\infty)$をみたす自然数列
+$\{	\:	k_n	\:	\}_{n=1}^\infty$がとれる．

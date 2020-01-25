@@ -1,0 +1,19 @@
+\section{長方形上の積分とフビニの定理}
+
+
+（保留）
+
+\例{1.36}
+$\displaystyle	\int_0^\infty	\frac{	\sin	x	}{x}	dx	=	\frac{\pi}{2}$．
+被積分関数は，$x=0$で$\displaystyle	\frac{\sin	x}{x}=1$とすれば，
+$x	\geqq	0$で連続だから，
+\[
+	\lim_{R\rightarrow\infty}	\int_0^R	\frac{	\sin	x}{x}	dx	=	\frac{\pi}{2}
+\]
+を示せばよい．
+
+方針．$\displaystyle	I(R)	=	\int	\int_{0	\leq	x,t	\leq	R}	e^{-xt}	\sin	x	dx	dt$とおき，
+\[
+	\int_0^R	e^{-xt}	\sin	x	dx	=	\frac{1}{1+t^2}	-	\frac{t	\sin	R	+	\cos	R}{1+t^2}	e^{-Rt}	\:	(R	>	0)
+\]
+を用いて，$I(R)$を2通りの累次積分で計算する．

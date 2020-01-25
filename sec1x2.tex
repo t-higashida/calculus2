@@ -1,0 +1,155 @@
+\section{積分の定義}
+
+面積が定義されるために必要だった条件（\S	\ref{sec1x1}の（\ref{eq1x1}））
+\[
+	\overline{S}	-	\underline{S}	\to	0	\quad	(h,k	\to	0)
+\]
+が成り立つのは，領域$D$を定める関数$f$がどのような場合だろうか．
+
+\定義{1.6}
+有界閉区間$[a,b]$上の関数$f$が単関数近似可能であるとは，$f$を一様近似する単関数の列
+$s_n	\:	(n=1,2,	\cdots	,	)$が存在することをいう．つまり，
+$f$に対して，単関数の列$s_n$を，
+\begin{equation}
+	\|	f	-	s_n	\|
+	=
+	\max_{a	\leq	x	\leq	b}	|	f(x)	-	s_n	(x)	|	\to	0	\quad	(	n	\to	\infty)
+\label{eq1x4}
+\end{equation}
+が成り立つように選べるとき，$f$は単関数近似可能という．
+\□
+
+\問{3}
+（\ref{eq1x4}）が成り立つとき，次式を示せ．
+\[
+	s_n(x)	-	\varepsilon_n	\leqq	f(x)	\leqq	s_n(x)	+	\varepsilon_n	
+	\quad
+	\text{ただし}
+	\quad	\varepsilon_n	=	\|	f	-	s_n	\|.
+\]
+\□
+
+上の(\ref{eq1x4})が成り立つとき，単関数の積分の性質から
+\[
+	|	I	(	s_n	,	[a,b])	-	I(s_m,	[a,b]|
+	=	
+	|	I(s_n	-	s_m,	[a,b]	)	|
+	\leqq
+	\|	s_n	-	s_m	\|	(b-a)
+\]
+ここで，
+\[
+	\|	s_n	-	s_m	\|	\leqq	\|	s_n	-	f	\|	+	\|	f	-	s_m	\|	\to	0
+	\quad	(n,m	\to	\infty)
+\]
+よって，$n	\to	\infty$での$I(s_n,	[a,b])$の極限が存在する（Cauchyの収束条件判定）．
+
+この極限を，$f$の$[a,b]$上の積分と定義したい．しかし，ここに，確かめておくべき点が
+ある．
+
+\begin{list}{}{}
+	\item	（ⅰ）この極限は$s_n$の選び方に依存せずさだまるのか？
+	\item	（ⅱ）どんな関数$f$に対して，$f$に一様収束する単関数の列$s_n$が選べるのか？
+	\item	（ⅲ）この極限で積分を定めるとき，微分成分学の基本公式が成り立つのか？
+\end{list}
+
+まず，（ⅰ）を確かめるのは簡単である．別の単関数列$t_n$が$\|	f	-t_n	\|	\to	0$を
+みたせば，$\|	s_n	-	t_n	\|	\leqq	\|	s_n	-f	\|	+	\|	f	-t_n	\|$だから，
+$\|	s_n	-	t_n	\|	\to	0$．したがって，
+単関数の積分の性質から，
+\begin{align*}
+	|	I	(s_n	,	[a,b]	)	-	I	(t_n	,	[a,b])	|	&=	|	I(	s_n	-	t_n	,	[a,b])	|	\\
+																						&\leqq	\|	s_n	-	t_n	\|	(b-a)		\to	0	\quad	(n	\to	\infty)
+\end{align*}
+よって，$\displaystyle	\lim_{n\rightarrow\infty}	I(s_n,	[a,b])	=	\lim_{n\rightarrow\infty}	I(t_n	,	[a,b])$．
+
+（ⅱ），（ⅲ）の検証は後回しにして，ともかく定義を与えよう．
+
+\定義{1.7}
+区間$[a,b]$上の関数$f$が単関数近似可能のとき，$f$を一様近似する単関数の列$s_n$の積分の極限値を，
+$f$の積分と呼び，
+\begin{equation}
+	\int_a^b	f(x)	dx	=	\lim_{n\rightarrow\infty}	I(s_n	,	[a,b])
+\label{eq1x5}
+\end{equation}
+と書く．この意味で，単関数近似可能な関数は積分可能である．
+
+とくに，$s$が単関数のときは，
+\[
+	\int_a^b	s(x)	dx	=	I(s,	[a,b]	).
+\]
+\□
+
+この定義と極限の性質から，積分の基本性質（Ⅰ）～（Ⅳ）（p.4）が成り立つ．
+
+\例{1.8}
+$f(x)	=	c	\:	(a	\leqq	x	\leqq	b)$.
+$f$自身が単関数だから，$s_n	=	f$ととればよく，
+\[
+	\int_a^b	c	dx	=	I(c,[a,b])	=	c(b-a).
+\]
+\□
+
+\例{1.9}
+$f(x)	=	x	\:	(a	\leqq	x	\leqq	 b)$.
+単関数$s_n$として，$n$個の分点$x_0^{(n)}	=	a	<	x_1^{(n)}	<	\cdots	<	x_n^{(n)}	=	b$をとり，
+区間$(x_{i-1}^{(n)},x_i^{(n)})$での値を$\displaystyle	\frac{x_{i-1}^{(n)}	+	x_i^{(n)}}{2}$にとれば，
+\begin{align*}
+	\max_{a	\leq	x	\leq	b}	|	f(x)	-	s_n(x)	|	
+&=	\max_{1	\leq	i	\leq	n}	\left|	x_i^{(n)}	-	\frac{	x_{i-1}^{(n)}	+	x_i^{(n)}}{2}	\right|\\	
+&=	\max_{1	\leq	i	\leq	n}	\frac{	x_i^{(n)}	-	x_{i-1}^{(n)}	}{2},	\\
+	I(s_n	,	[a,b])	&=	\sum_{i=1}^n	\frac{	x_{i-1}^{(n)}	+	x_i^{(n)}}{2}	(x_i^{(n)}	-	x_{i-1}^{(n)})	\\
+									&=	\sum_{i=1}^n	\frac{	x_i^{(n)}}{2}	=	\frac{b^2	-	a^2}{2}.
+\end{align*}
+よって，$\max_{1	\leq	i	\leq	n}	(x_i^{(n)}	-	x_{i-1}^{(n)})	\to	0$のとき，
+$s_n$は$f$に一様収束し，
+\[
+	\int_a^b	x	dx	=	\frac{b^2	-	a^2}{2}.
+\]
+\□
+
+なお，区間$(x_{i-1}^{(n)}	,	x_i^{(n)})$での値を$x_{i-1}^{(n)}$や$x_i^{(n)}$にとると，
+\begin{align*}
+	\left|
+		I(s_n	,	[a,b]	)	-	\frac{b^2	-	a^2}{2}
+	\right|
+	&=
+	\sum_{i=1}^n	\frac{1}{2}	(	x_i^{(n)}	-	x_{i-1}^{(n)})^2	\\
+	&	\leqq
+	\frac{1}{2}(b-a)	\max_{1	\leq	i	\leq	n}	(	x_i^{(n)}	-	x_{i-1}^{(n)})	\to	0
+\end{align*}
+として，上のことが示される．
+
+\例{1.10}
+
+（保留）
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

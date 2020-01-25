@@ -1,0 +1,284 @@
+\chapter{多変数関数の微分と1次，2次近似}
+
+多変数関数についても，微分とは本質的に
+1次近似であり，関数の極値などを調べるために
+1次近似と共に2次近似が重要である
+
+
+この章では，主に2変数の場合に，1次，2次関数のグラフの形を確認し，
+微分と偏微分，臨界点，ヘッセ行列などの概念を導入し，
+さらに，対称行列の対角化と2次形式の標準形を，
+微分法を用いて証明する．
+
+\section{多変数の1次関数と2次関数}
+
+微分とは本質的に1次近似であり，多変数の場合も，
+1次，2次関数の理解が基本的である．ここでは，
+2変数の場合を中心に詳しく調べておく．
+
+\例{3.1}
+$a,b,c$が定数のとき，関数
+\[
+	z = ax + by + c
+\]
+は$xyz$空間内の平面を表す．この平面の単位法線ベクトル
+$\boldsymbol{n}$は
+\[
+	\boldsymbol{n} = \frac{1}{\sqrt{a^2 + b^2 + 1}}
+                   \begin{pmatrix}
+		                  -a \\ -b \\ 1
+									 \end{pmatrix}
+\]
+であり，平面外の点$(x_0, y_0 , z_0)$からこの平面までの距離は
+\[
+	\frac{z_0 -ax_0 - by_0 -c}{\sqrt{a^2 + b^2 + 1}}
+\]
+である．（ここでは符号つきで，平面の上側の点までの距離を正に，
+下側の点までの距離を負にとってある．)
+\□
+\begin{figure}[hbtp]
+	\centering
+	\includegraphics[bb=0 0 800 200,clip,width=6cm,height=5cm]{fig3x1.bmp}
+	\caption{平面外の点から平面までの距離}
+	\label{fig3x1}
+\end{figure}
+
+\subsubsection{平面の方程式の導出}
+
+平面は，空間中の点と平面に垂直な法線ベクトルが決まれば，一意的に決まる。
+平面上の点$P$の座標を$(x_0 , y_0 , z_0 )$，
+法線ベクトルを$\boldsymbol{n}=( a,b,c )$とし，
+平面上の任意の点$Q$の座標を$( x,y,z )$とすると，
+ベクトル$\overrightarrow{PQ}$は平面に含まれる．
+$\boldsymbol{n}$は平面の法線ベクトルなので， 
+$\boldsymbol{n}$と$PQ$のなす角は90である。
+よって， 
+\[
+	\boldsymbol{n}\cdot \overrightarrow{PQ} = 0.
+\]
+となる。この関係から（両ベクトルの内積をとると）
+\begin{align*}
+	&(a,b,c) \cdot (x-x_0,y-y_0,z-z_0) =0 \\
+  &\Rightarrow	a( x- x_0 )+b( y- y_0 )+c( z- z_0 )=0	
+\end{align*}
+となり，平面の方程式が求まる。
+
+\subsubsection{平面の方程式の求め方のいろいろ，空間中の3点で決まる平面の方程式}
+空間中の3点を$A(a_x,a_y,a_z),B(b_x,b_y,b_z),C(c_x,c_y,c_z)$
+とする。3点を含む平面上の点を$P(x,y,z)$とすると，$AB$と$AC$をもちいて$AP$
+を表すと
+\[
+ m \overrightarrow{AB} +n \overrightarrow{AC}= \overrightarrow{AP}
+\]
+ここで，$m,n$は媒介変数。これを座標成分で表すと，
+\begin{align*}
+  &m((b_x,b_y,b_z)-(a_x,a_y,a_z))+n((c_x,c_y,c_z)-(a_x,a_y,a_z)) \\
+&=(m(b_x-a_x)+n(c_x-a_x),m(b_y-a_y)+n(c_y-a_y),m(b_z-a_z)+n(c_z-a_z)) \\
+&=((x,y,z)-(a_x,a_y,a_z))	\\
+\Rightarrow
+&\begin{cases}
+\: m(b_x-a_x)+n(c_x-a_x)=x-a_x	\\
+\: m(b_y-a_y)+n(c_y-a_y)=y-a_y	\\
+\: m(b_z-a_z)+n(c_z-a_z)=z-a_z	\\
+\end{cases}
+\end{align*}
+この関係式から$m,n$を消去すると平面の方程式が得られる。 
+
+\subsubsection{別の方法}
+平面の方程式の一般形の
+$a_x+b_y+c_z+d=0$に点$A$,点$B$,点$C$の座標を代入して得られる連立方程式 
+\begin{align*}
+  &a \cdot a_x+b\cdot a_y+c\cdot a_z+d=0 \\
+  &a \cdot b_x+b\cdot b_y+c\cdot b_z+d=0 \\
+  &a \cdot c_x+b\cdot c_y+c\cdot c_z+d=0
+\end{align*}
+を解いても3点を含む平面の方程式を求めることができる。
+
+\問{1}
+$a,b,c > 0$のとき，方程式
+\[
+	\frac{x}{a} + \frac{y}{b} + \frac{z}{c} = 1
+\]
+が表す平面を描け．
+
+\解
+$x,y,z$切片が$a,b,c$の平面となる．
+
+図略
+
+（javaやeclipsををダウンロードして描画してみる）．
+
+\例{3.2}
+2次関数$z=x^2 + y^2$は放物線$z=x^2$を$z$軸にまわりに回転させて
+得られる曲面で，このような曲面を\textbf{回転放物面}という．
+この放物面の等高線を$z=c$を$xy$平面に描くと，
+\begin{align*}
+	&\text{$c>0 \quad$ のとき，半径$\sqrt{c}$の円} \\
+	&\text{$c=0 \quad$ のとき，1点$(0,0)$} \\
+	&\text{$c<0 \quad$ のとき，空集合} \\
+\end{align*}
+となる．
+\begin{figure}[hbtp]
+	\centering
+	\includegraphics[bb=0 0 800 200,clip,width=6cm,height=8cm]{fig3x2.bmp}
+	\caption{}
+	\label{fig3x2}
+\end{figure}
+
+\問{2}
+下に開いた回転放物面$z=-x^2-y^2$の概形を描け．
+
+\解
+図\ref{fig3x2}の上下を反転すればよい．
+
+\例{3.3}
+$z=\alpha x^2 + \beta y^2 \: (\alpha,\beta>0)$の等高線は，
+\begin{align*}
+	&\text{$c>0$のとき，楕円$\alpha x^2 + \beta y^2 =c$} \\
+	&\text{$c=0$のとき，1点$(0,0)$} \\
+	&\text{$c<0$のとき，空集合}
+\end{align*}
+
+\例{3.4}
+$z=\alpha x^2 - \beta y^2 \; (\alpha,\beta >0)$の等高線
+$z=c$は，
+\begin{align*}
+	&\text{$c>0$のとき，双曲線$\alpha x^2 - \beta y^2 =c$} \\
+	&\text{$c=0$のとき，2直線$\sqrt{\alpha} x \pm \sqrt{\beta}y = 0$} \\
+	&\text{$c<0$のとき，双曲線$\beta y^2 - \alpha x^2 = |c|$}
+\end{align*}
+である．また，$z$軸を通る平面$y=mx$による切り口を考えると，
+\[
+	z=\alpha x^2 - \beta (mx)^2 = (\alpha -\beta m^2)x^2
+\]
+だから，
+\begin{align*}
+	&|m| < \sqrt{\frac{\alpha}{\beta}} \text{のとき，上に開いた放物線} \\	
+	&|m| = \pm \sqrt{\frac{\alpha}{\beta}} \text{のとき，直線$z=0$，$y=\pm mx$}	\\
+	&|m| > \sqrt{\frac{\alpha}{\beta}} \text{のとき，下に開いた放物線}
+\end{align*}
+となる．このような曲線を\textbf{双曲放物面}という．
+\begin{figure}[hbtp]
+	\centering
+	\includegraphics[bb=0 0 800 200,clip,width=7cm,height=6cm]{fig3x3.bmp}
+	\caption{双曲放物面$z=\alpha x^2 - \beta y^2 \: (\alpha,\beta >0)$}
+	\label{fig3x3}
+\end{figure}
+
+\問{3}
+双曲放物面$z = y^2 -x^2$で表される土地に直上から雨が降るとき，
+川はどこにできるか．また，分岐嶺はどこか．
+
+\解
+
+川は$xz$平面との交線，分岐嶺は$yz$平面との交線．
+
+\例{3.5}
+$z=\alpha x^2 (\alpha > 0)$で表される曲面は図\ref{fig3x4}のようになる．
+このように曲面を\textbf{放物筒}という．
+\begin{figure}[hbtp]
+	\centering
+	\includegraphics[bb=0 0 800 200,clip,width=10cm,height=6cm]{fig3x4.bmp}
+	\caption{放物面$z = \alpha x^2 \; (\alpha > 0)$}
+	\label{fig3x4}
+\end{figure}
+一般に，2次同次関数について次のことがいえる．
+
+\定理{3.6}
+2次同次関数
+\[
+	z=\alpha x^2 + 2bxy + c y^2 \quad (a^2 + b^2 + c^2 > 0)
+\]
+は適当な回転
+\begin{equation}
+	\begin{cases}
+		\: x = u \cos \theta - v \sin \theta \\
+		\: y = u \sin \theta + v \cos \theta
+	\end{cases}	
+\label{eq3x1}
+\end{equation}
+を施すと，次のいずれかの形に変形できる$(\alpha , \beta >0)$.
+\begin{align}
+	z &= \alpha u^2 + \beta v^2 , z = -\alpha u^2 - \beta v^2 & &\quad \text{(楕円放物面)} \label{eq3x2}\\
+  z &= \alpha u^2 - \beta v^2                               & &\quad \text{(双曲放物面)} \label{eq3x3}\\
+  z &= \alpha u^2, \quad z = -\alpha u^2                    & &\quad \text{(放物筒)}     \label{eq3x4}
+\end{align}
+\証明
+\begin{align*}
+	z &= ax^2 + 2bxy + cy^2 \\
+    &= a(u \cos \theta - v \sin \theta)^2 + 2b (u \cos \theta - v \sin \theta)(u \sin \theta + v\cos \theta) \\
+    &  \quad + c(u \sin \theta + v \cos \theta)^2 \\
+    &= a(u^2 \cos^2 \theta - 2 uv \cos \theta \sin \theta + v^2 \sin^2 \theta) \\
+    & \quad + 2b(u^2 \cos \theta \sin \theta + uv \cos^2 \theta - uv \sin^2 \theta - v^2 \sin \theta \cos \theta) \\
+    & \quad + c(u^2 \sin^2 \theta + 2uv \sin \theta \cos \theta + v^2 \cos^2 \theta) \\
+    &= (a \cos^2 \theta + 2b \cos \theta \sin \theta + c \sin ^2 \theta)u^2 \\
+    & \quad + ( -2a \cos \theta \sin \theta + 2b \cos^2 \theta -2b \sin^2 \theta + 2c \sin \theta \cos \theta)uv \\
+    & \quad + (a \sin^2 \theta -2b \sin \theta \cos \theta + c \cos^2 \theta) v^2 \\
+    &= \frac{1}{2} (2a \sin^2 \theta + 4b\sin \theta \cos \theta + 2 c\cos^2 \theta) u^2\\
+    & \quad + ( -2a \cos \theta \sin \theta + 2b \cos^2 \theta -2b \sin^2 \theta + 2c \sin \theta \cos \theta)uv \\
+    & \quad + \frac{1}{2}(2 a \sin^2 \theta -4b \sin \theta \cos \theta + 2 c \cos^2 \theta) v^2 \\
+\end{align*}
+\begin{align*}
+    &= \frac{1}{2} ((a+c) -a \cos^2 \theta + a \sin^2 \theta + c\cos^2 \theta - c \sin^2 \theta + 2b\sin 2 \theta ) u^2\\
+    & \quad + ( -2a \cos \theta \sin \theta + 2b \cos^2 \theta -2b \sin^2 \theta + 2c \sin \theta \cos \theta)uv \\
+    & \quad + \frac{1}{2}((a+c) -a \cos^2 \theta + a \sin^2 \theta + c\cos^2 \theta - c \sin^2 \theta - 2b\sin 2 \theta ) v^2 \\
+    &= \frac{1}{2} \{ (a+c) + (a-c) \cos 2 \theta + 2b \sin 2 \theta \} u^2 \\
+    &  \quad + \{ - (a-c) \sin 2 \theta + 2b \cos 2 \theta\}uv \\
+    &  \quad + \frac{1}{2} \{(a+c) - (a-c) \cos 2 \theta - 2b \sin 2 \theta\} v^2
+\end{align*}
+よって，$uv$の係数が$0$になるためには，$\theta$を
+\[
+	-(a-c) \sin 2\theta + 2b \cos 2 \theta =0
+\]
+となるように選べばよい．そこで，$\theta$を
+\[
+	\sin 2 \theta = \frac{2b}{\sqrt{(a-c)^2 + 4b^2}}, \quad
+	\cos 2 \theta = \frac{a-c}{\sqrt{(a-c)^2 + 4b^2}}
+\]
+により定める．
+このとき，$u^2,v^2$の係数$\lambda,\mu$はそれぞれ，
+\begin{align*}
+	\lambda &= \frac{1}{2} \{ (a+c) + (a-c) \cos 2 \theta + 2b \sin 2 \theta \} \\
+          &= \frac{1}{2} \left\{
+                            (a+c) + \frac{(a-c)^2}{\sqrt{(a-c)^2 + 4b^2}} + \frac{4b^2}{\sqrt{(a-c)^2 + 4b^2}}
+                         \right\} \\
+          &= \frac{a+c + \sqrt{(a-c)^2 + 4b^2}}{2} \\
+  \mu     &= \frac{1}{2} \{(a+c) - (a-c) \cos 2 \theta - 2b \sin 2 \theta\} \\
+          &= \frac{1}{2} \left\{
+                            (a+c) - \frac{(a-c)^2}{\sqrt{(a-c)^2 + 4b^2}} - \frac{4b^2}{\sqrt{(a-c)^2 + 4b^2}}
+                         \right\} \\
+          &= \frac{a+c - \sqrt{(a-c)^2 + 4b^2}}{2} \\
+\end{align*}
+となる．したがって，
+\begin{align*}
+	&\text{$\lambda,\mu$が同符合で，$0$でないとき(\ref{eq3x2})の形} \\
+	&\text{$\lambda,\mu$が異符号で，(\ref{eq3x3})の形} \\
+	&\text{$\lambda,\mu$の1つが$0$のとき，(\ref{eq3x4})の形}
+\end{align*}
+となる．($\lambda = \mu =0$ならば，$a=b=c=0$である.)
+\■
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

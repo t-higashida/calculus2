@@ -1,0 +1,229 @@
+\chapter{単関数と積分}
+
+この章では，単関数（または，階段関数）による近似を用いて，まず，区間上の連続関数や
+区分的連続関数の積分を定義し，積分と極限の順序交換などを考える．
+
+さらに，長方形の上の関数の積分も同様の方法で定義し，フビニの定理（累次積分との関係，積分の順序交換），
+積分記号下での微分などを学ぶ．なお，多変数の場合のリーマン積分は第5章で扱う．
+
+この第1章では，やや抽象的な議論も必要となる．そのような部分に興味を感じない読者は，
+例や例題を理解しておいて，残りの部分は将来，必要性を感じたときに読み直せば十分である．
+その際には，第5章を続いて読むとよい．
+
+\section{単関数とその積分}
+\label{sec1x1}
+
+最初に，素朴な面積の概念を思い出そう．
+
+平面図形$D$が与えられたとき，その面積$S$は次の手順で求められる（図\ref{fig1x1} 参照）．
+
+\begin{list}{}{}
+	\item	（1）平面の縦横それぞれを適当な刻み幅$h,k$で切り分けて，面積$hk$の小長方形に分ける．
+	\item	（2）$D$の中にある小長方形の数$\underline{N}$と，$D$の共通部分をもつ小長方形の数$\overline{N}$を
+数え上げて，$\underline{S} = \underline{N}hk, \overline{S}=\overline{N}hk$とおく．（$\underline{S},\overline{S}$
+は$S$の近似値で，$\underline{S} \leqq S \leqq \overline{S}$.）
+		\begin{figure}[hbtp]
+			\centering
+			\includegraphics[bb=0 0 800 200,clip,width=76mm,height=56mm]{fig1x1.bmp}
+			\caption{$f(x) = \sqrt{1-x^2} \: (-1 \leqq x \leqq 1)$と$x$軸で囲まれる半円の面積}
+			\label{fig1x1}
+		\end{figure}
+	\item	（3）$h,k	\rightarrow	0$のとき，
+	\begin{equation}	
+			\overline{S}	-	\underline{S}	\to 0	\label{eq1x1}
+	\end{equation}
+ならば，極限値
+\[
+		S	=	\lim_{h,k\rightarrow 0}	\overline{S}	=	\lim_{h,k\rightarrow 0}	\underline{S}
+\]
+図形$D$の面積である．（もし，（\ref{eq1x1}）が成り立たなければ，$D$の面積は定義されない．）
+\end{list}
+
+この考え方を利用して，関数$f(x) \: ( a \leqq x \leqq b)$の積分を定義するために，
+近似する関数が必要となる．
+
+\定義{1.1}
+関数$s(x)$が次のように表示できるとき，$s(x)$を\textbf{単関数}（simple funtion）（または，階段関数）という：
+\begin{equation}
+	s(x)	\:	=	\begin{cases}
+								\:	c_i	&	(x_{i-1}	<	x	<	x_i	,	i=1,2,	\cdots	,	n)	\\
+								\:	0		&	(x	<	x_0	,	\:	x	>	x_n)
+							\end{cases}
+	\label{eq1x2}
+\end{equation}
+ただし，$n$は自然数，$-	\infty	<	x_0	<	x_1	<	\cdots	<	x_n	<	\infty$で，
+$s(x)$の分点$x=x_i$での値は（どう決めてもよいが），$c_i$または$c_{i+1}$のどちらかにとることが多い．
+
+有界な閉区間$[a,b]$で定義された単関数$s$が（\ref{eq1x2}）で表示されるとき，
+（$x_0	\geqq	a	,\:	x_n	\leqq	b$ として）
+\begin{equation}
+	I(s,	[	a,b]	)	=	\sum_{i=1}^n	c_i	(x_i	-	x_{i-1})
+	\label{eq1x3}
+\end{equation}
+を$s$の$[a,b]$上での\textbf{積分}（integral）という．
+
+\例{1.2}
+\[
+	H(x)	=	\begin{cases}
+						\:	1	\quad	\:	(x	\geqq	0)	\\
+						\:	0	\quad	\:	(	x	<	0
+					\end{cases}
+\]
+（$H(x)$はヘビサイド（Heaviside）関数とよばれる）のとき，
+\begin{figure}[hbtp]
+	\centering
+	\includegraphics[bb=0 0 800 200,clip,width=70.5mm,height=41.9mm]{exmpl1x2.bmp}
+\end{figure}
+\[
+	I(H,	[a,b])	=	\begin{cases}
+										\:	0				&\quad	(a	<	b	<	0)	\\
+										\:	b				&\quad	(	a	<	0	\leqq	b)	\\
+										\:	b-a			&\quad	(	0	<	a	<	b	)	
+									\end{cases}
+\]
+\□
+
+\例{1.3}（次ページの図を参照）
+\[
+	s(x)	=	\begin{cases}
+						\:	0		&\quad	(x<1)	\\
+						\:	1		&\quad	(1	\leqq	x	<	3)	\\
+						\:	-2	&\quad	(3	\leqq	x	\leqq	4)	\\
+						\:	0		&\quad	(	4	<	x	<	5)	\\
+						\:	1		&\quad	(	5	\leqq	x	<	6)	\\
+						\:	0		&\quad	(	x	\geqq	6)
+					\end{cases}
+\]
+のとき，
+\[
+	I(s,[0,7])	=	1	\cdot	(3-1)	+	(-2)	\cdot	(4-3)	+	1	\cdot	(6-5)	=	1.
+\]
+\begin{figure}[hbtp]
+	\centering
+	\includegraphics[bb=0 0 800 200,clip,width=70.3mm,height=41.3mm]{exmpl1x3.bmp}
+\end{figure}
+\□
+
+\注意{}
+単関数$s$の表示（\ref{eq1x2}）は1通りではない．例えば，例1.3では，分点として，
+$x_i	=	i	\:	(i=1,2,	\cdots	,	\cdots	,6)$をとって表示することもできる．
+しかし，単関数の積分$I(s,[a,b])$の値は表示の仕方によらない．
+
+２つの単関数$s(x),t(x)$の和$s(x)	+	t(x)$もまた単関数である．
+
+\例{1.4}
+例1.3の$s(x)$と，
+\[
+	t(x)	=	\begin{cases}
+						\:	0			&	\quad	(	x	<	2	)	\\
+						\:	1/2		&	\quad	(	2	\leqq	x	<	5)	\\
+						\:	0			&	\quad	(	x	\geqq	5)
+					\end{cases}
+\]
+の和は，
+\begin{figure}[hbtp]
+	\centering
+	\includegraphics[bb=0 0 800 200,clip,width=69.7mm,height=27.8mm]{exmpl1x4x1.bmp}
+\end{figure}
+\[
+	s(x)	+	t(x)	=	\begin{cases}
+											\:	0		&	\quad	(	x<1)	\\
+											\:	1		&	\quad	(	1	\leqq	x	<	2)	\\
+											\:	3/2	&	\quad	(	2	\leqq	x	<	3)	\\
+											\:	-3/2	&	\quad	(3	\leqq	x	\leqq	4)	\\
+											\:	1/2		&	\quad	(	4	<	x	<	5)	\\
+											\:	1			&	\quad	(	5	\leqq	x	<	6	)	\\
+											\:	0			&	\quad	(	x	\geqq	6)
+									\end{cases}
+\]
+\begin{figure}[hbtp]
+	\centering
+	\includegraphics[bb=0 0 800 200,clip,width=72.3mm,height=43.3mm]{exmpl1x4x2.bmp}
+\end{figure}
+\□
+積分や（符号つき）面積というからには，当然成り立つべき性質（積分の基本性質）がいくつかある．
+\begin{list}{}{}
+	\item	（Ⅰ）（積分の線形性）定数倍$\lambda	s$と和$s+t$に対して，
+		\begin{list}{}{}
+			\item	（ⅰ）$I(\lambda	s,	[a,b])	=	\lambda	I(s,[a,b])$，
+			\item	（ⅱ）$I(\lambda	s+t,	[a,b])	=	\lambda	I(s,[a,b]) + \lambda	I(t,[a,b])$，
+		\end{list}
+	実際，和の性質
+		\[
+			\sum_{i=1}^{n}	(c_i	+	d_i)	(x_i	-	x_{i-1})	=	
+			\sum_{i=1}^{n}	c_i	(	x_i	-	x_{i-1}	+	\sum_{i=1}^{n}	d_i	(	x_i	-	x_{i-1})
+		\]
+により，（ⅱ）を得る．（ⅰ）はもっと簡単である．
+	\item	（Ⅱ）（積分の非負性と単調性）
+		\begin{list}{}{}
+			\item	（ⅰ）$s	\geqq	0$のとき，$I(s,[a,b])	\geqq	0$，
+			\item	（ⅱ）$s	\geqq	t$のとき，$I(s,[a,b])	\geqq	I(t,[a,b])$．
+		\end{list}
+		実際，$c_i	\geqq	d_i$ならば，$\displaystyle	\sum_{i=1}^{n}	c_i	(x_i	-	x_{i-1}	\geqq	\sum_{i=1}^{n}	d_i	(x_i	-	x_{i-1})$
+		だから，（ⅱ）．また，（ⅱ）で$t=0$とおけば，（ⅰ）．
+	\item	（Ⅲ）（積分の有界性）$\|	s	\|	=	\max_{a	\leqq	x	\leqq	b}	|s(x)|$とおくと，
+		\[
+			|	I(s,	[a,b]	)	|	\leqq	\|	s	\|	(b-a).
+		\]
+	実際，直接確かめればよいが，不等式	$-	\|	s	\|	\leqq	s(x)	\leqq	\|	s	\|$を用いて（Ⅱ）の（ⅱ）かこれを導く簡単である．
+	\item	（Ⅳ）（積分区間に関する加法性）$	a	<	c	<	b	$のとき，
+			\[
+					I(s,[a,b])	=	I(s,[a,c])	+	I(s,[c,b]).				
+			\]
+これは明らか．
+\end{list}
+\□
+
+\例{1.5}
+$\alpha	>	0,	0	<	r	<	1$，$n$を自然数として，
+\[
+	s_{r,n}(x)	=	\begin{cases}
+									\:	r^{\alpha	k}	&	\quad	(	\text{$r^k	<	x	\leqq	r^{k-1}$，$k=1,2,	\cdots	,	n$のとき）}	\\
+									\:	0							&	\quad	(	\text{$0	\leqq	x	\leqq	r^n$のとき）}
+								\end{cases}
+\]
+のとき，
+\begin{align*}
+	I(s_{r,n},	[0,1])
+&=	\sum_{k=1}^{n}	r^{\alpha	k}	(	r^{k-1}	-	r^k)	
+	=	\sum_{k=1}^{n}	r^{\alpha	k}r^{k-1}(1-r)	
+	=	\sum_{k=1}^{n}	\frac{r^{\alpha	k}r^k}{r}(1-r)		\\
+&	=	\frac{1-r}{r}	\sum_{k=1}^{n}r^{(1+\alpha)	k}
+	=	\frac{1-r}{r}	\frac{r^{1+\alpha}	-	r^{(1+\alpha)(n+1)}}{1-r^{1+\alpha}}.
+\end{align*}
+\□
+
+なお，この値は$n	\to \infty$のとき，$\displaystyle	\frac{r^\alpha	(1-r)}{1-r^{1+\alpha}}$に
+近づき，さらに，$r \to 1$とすると，$\displaystyle	\frac{1}{1+\alpha}	=	\int_0^1	x^\alpha	dx$
+に近づく．
+
+\問{1}
+$I(t_{r,n},[0,1])$を求め，$n	\to	\infty,	r	\to	1$の極限を調べよ．ただし，
+\[
+	t_{r,n}(x)	=	\begin{cases}
+											\:	r^{\alpha(k-1)}	&	\quad	\text{（$r^k	<	x	\leqq	r^{k-1},	k=1,2,\cdots,	n$のとき）}	\\
+											\:	r^{\alpha	n}		&	\quad	\text{（$0	\leqq	x	\leqq	r^n$のとき）}
+								\end{cases}
+\]
+
+\問{2}
+$\|	x^\alpha	-	s_{r,n}	\|	=	\max_{0	\leq	x	\leq	1}	|	x^\alpha	-	s_{r,n}(x)	|$とおくとき，
+\[
+	\|	x^\alpha	-	s_{r,n}	\|	=	\max	\{	1	-	r^\alpha	,	r^{n\alpha}	\}
+\]
+であることを示せ．
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
